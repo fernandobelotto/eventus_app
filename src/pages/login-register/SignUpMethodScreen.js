@@ -2,8 +2,22 @@ import React from 'react'
 import { View, Text, Image, StyleSheet } from 'react-native'
 import { Button } from 'react-native-paper'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import googleLogin from '../../hooks/googleLogin'
+
+// import signUp from '../../hooks/signUp'
 
 const SignUpMethodScreen = ({ navigation }) => {
+  async function googleSignUp() {
+    const { name, email, method } = await googleLogin()
+    console.log(name, email, method)
+    // signUp(name, email, method)
+  }
+
+  async function facebookSignUp() {
+    // const userData = await facebookLogin()
+    // console.log(userData)
+  }
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'space-between' }}>
       <Image
@@ -20,7 +34,9 @@ const SignUpMethodScreen = ({ navigation }) => {
               source={require('../../assets/images/google.png')}
               style={{ width: 20, height: 20, marginRight: 20 }}
             />
-          )} style={{ width: 300, borderRadius: 5 }} color='white' mode='contained' onPress={() => console.log('opa')} labelStyle={{ fontFamily: 'Comfortaa-Bold', color: '#4285F4' }}
+          )} style={{ width: 300, borderRadius: 5 }} color='white' mode='contained'
+          onPress={googleSignUp}
+          labelStyle={{ fontFamily: 'Comfortaa-Bold', color: '#4285F4' }}
         >
           cadastrar com google
         </Button>

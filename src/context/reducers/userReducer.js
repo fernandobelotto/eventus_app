@@ -2,7 +2,8 @@ const initialValue = {
   id: null,
   name: null,
   email: null,
-  loginOption: null
+  loginOption: null,
+  tickets: []
 }
 
 function userReducer(state, action) {

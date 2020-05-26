@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "243970341797",
+    "firebase_url": "https://eventus-b74a2.firebaseio.com",
+    "project_id": "eventus-b74a2",
+    "storage_bucket": "eventus-b74a2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:243970341797:android:70441e0cb313536f43864c",
+        "android_client_info": {
+          "package_name": "com.desafiombapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "243970341797-09qncjpdikf04criabh92udub3059tjd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.desafiombapp",
+            "certificate_hash": "b7e1e501de261f8f9c6a137db722481e788fdf36"
+          }
+        },
+        {
+          "client_id": "243970341797-fgf153qdpet5pa2hb3176vtmo3erpfda.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUNCOuFmbu4Bfnb9LQtZbFdlMyLAxy_kw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "243970341797-fgf153qdpet5pa2hb3176vtmo3erpfda.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
