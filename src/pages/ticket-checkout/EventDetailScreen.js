@@ -31,7 +31,6 @@ const EventDetailScreen = ({ navigation }) => {
           <Button style={{ marginTop: 40, width: 250, borderRadius: 5, alignSelf: 'center' }} color='#1C35B9' mode='contained' onPress={() => navigation.navigate('TicketChoiceScreen')} labelStyle={{ fontFamily: 'Comfortaa-Bold', color: 'white' }}>
             ingressos
           </Button>
-
         </View>
       </View>
     </View>
