@@ -15,6 +15,7 @@ export default async function googleLogin () {
     return {
       email: userInfo.user.email,
       name: userInfo.user.name,
+      pass: 'undefined',
       method: 'google'
     }
   } catch (error) {

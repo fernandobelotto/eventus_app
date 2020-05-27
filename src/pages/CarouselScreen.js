@@ -7,19 +7,23 @@ const CarouselScreen = ({ navigation }) => {
   return (
     <View style={{ flex: 1, backgroundColor: '#6658ED' }}>
       <Image source={require('../assets/images/header-logo.png')} resizeMode='contain' style={{ width: 200, height: 100, alignSelf: 'center' }} />
-      <Swiper containerStyle={{ flex: 1 }}>
-        <View style={styles.slide1}>
-          <Text style={styles.text}>Bem Vindo</Text>
+      <Swiper containerStyle={{ flex: 1 }} dotColor='rgba(255,255,255,0.4)' activeDotColor='white'>
+        <View style={styles.slide}>
+          <Text style={styles.text}>Descubra os melhore eventos</Text>
         </View>
-        <View style={styles.slide2}>
-          <Text style={styles.text}>Ao Melhor</Text>
+        <View style={styles.slide}>
+          <Text style={styles.text}>Compre com segurança</Text>
         </View>
-        <View style={styles.slide3}>
-          <Text style={styles.text}>App de Eventos!</Text>
+        <View style={styles.slide}>
+          <Text style={styles.text}>Divulgue entre amigos</Text>
         </View>
       </Swiper>
       <View style={{ flex: 0.3, justifyContent: 'space-evenly', alignItems: 'center' }}>
-        <Button style={{ width: 200, borderRadius: 5 }} color='white' icon='log-in' mode='contained' onPress={() => navigation.navigate('SignInScreen')} labelStyle={{ fontFamily: 'Comfortaa-Bold', color: '#6658ED' }}>
+        <Button
+          style={{ width: 200, borderRadius: 5 }}
+          color='#FFF' icon='log-in' mode='contained' onPress={() => navigation.navigate('SignInScreen')}
+          labelStyle={{ fontFamily: 'Comfortaa-Bold', color: '#6658ED' }}
+        >
           entrar
         </Button>
         <Button
@@ -38,24 +42,16 @@ const CarouselScreen = ({ navigation }) => {
 export default CarouselScreen
 
 const styles = StyleSheet.create({
-  slide1: {
+  slide: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
-  },
-  slide2: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  slide3: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingHorizontal: 40
   },
   text: {
-    color: '#fff',
-    fontSize: 30,
-    fontWeight: 'bold'
+    color: 'white',
+    fontSize: 48,
+    fontFamily: 'Comfortaa-Bold',
+    textAlign: 'left'
   }
 })

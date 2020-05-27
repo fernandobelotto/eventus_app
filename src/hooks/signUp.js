@@ -1,11 +1,8 @@
 
-import { useContext } from 'react'
 import NetInfo from '@react-native-community/netinfo'
+import { postApi } from '../api/fetch'
 
-import { Context } from '../context/index'
-import { postApi } from '../../api/desafio2020Fetch'
-
-function checkResponse (response) {
+function checkResponse(response) {
   if (response.status === 'success') {
     return true
   } else {
@@ -18,20 +15,10 @@ function checkResponse (response) {
   }
 }
 
-function checkConnection (isConnected) {
-  if (!isConnected) {
-    console.log('Verify your internet connection!')
-    return false
-  }
-  return true
-}
-
-export default async function signUp (email, name, loginOption) {
-  const { user } = useContext(Context)
-  const { state: userState, dispatch: userDispatch } = user
+export default async function signUp(email, name, loginOption, pass) {
   try {
     const { isConnected } = await NetInfo.fetch()
-    if (!checkConnection(isConnected)) return
+    if (!isConnected) return 'no internet'
 
     var userToCreate = {
       name: name,
@@ -39,11 +26,13 @@ export default async function signUp (email, name, loginOption) {
       loginOption: loginOption
     }
 
+    if (loginOption === 'email') {
+      userToCreate.password = pass
+    }
+
     const url = '/user'
     const response = await postApi(url, userToCreate)
-    if (!checkResponse(response)) return
-
-    await userDispatch({ type: 'add_email_name_loginOption', payload: { id: response.userId, name: userToCreate.name, code: userToCreate.loginOption } })
+    if (response.status === 'sucess') return true
   } catch {
     console.log('Ops! something went wrong')
   }

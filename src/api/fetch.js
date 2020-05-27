@@ -1,6 +1,6 @@
 const URL_BASE = 'http://192.168.0.102:3000'
 
-export default function eventusFetch(url, options, formData) {
+export default function eventusFetch (url, options, formData) {
   const defaultHeader = { headers: { 'Content-Type': formData ? 'multipart/form-data' : 'application/json' } }
 
   options = { ...defaultHeader, ...options }
@@ -12,7 +12,7 @@ export default function eventusFetch(url, options, formData) {
     })
 }
 
-export function getApi(url) {
+export function getApi (url) {
   const options = {
     method: 'GET'
   }
@@ -26,22 +26,22 @@ export function getApi(url) {
     })
 }
 
-export function postApi(url, bodyData) {
+export function postApi (url, bodyData) {
   const options = {
     method: 'POST',
     body: JSON.stringify(bodyData)
   }
 
-  return eventusFetch(url, { method: 'POST', body: { da } }})
+  return eventusFetch(url, options)
     .then(({ data }) => {
-    return data
-  })
-  .catch(error => {
-    return error
-  })
+      return data
+    })
+    .catch(error => {
+      return error
+    })
 }
 
-export function patchApi(url, bodyData) {
+export function patchApi (url, bodyData) {
   const options = {
     method: 'PATCH',
     body: JSON.stringify(bodyData)

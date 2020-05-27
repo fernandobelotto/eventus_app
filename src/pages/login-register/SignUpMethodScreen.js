@@ -3,19 +3,26 @@ import { View, Text, Image, StyleSheet } from 'react-native'
 import { Button } from 'react-native-paper'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import googleLogin from '../../hooks/googleLogin'
+import signUp from '../../hooks/signUp'
 
 // import signUp from '../../hooks/signUp'
 
 const SignUpMethodScreen = ({ navigation }) => {
-  async function googleSignUp () {
-    const { name, email, method } = await googleLogin()
-    console.log(name, email, method)
-    // signUp(name, email, method)
-  }
-
-  async function facebookSignUp () {
-    // const userData = await facebookLogin()
-    // console.log(userData)
+  async function trySignUp (method) {
+    switch (method) {
+      case 'google': {
+        const { email, name } = await googleLogin()
+        console.log('name :>> ', name)
+        console.log('email :>> ', email)
+        const checkGoogle = await signUp(email, name, 'google', 'undefined')
+        console.log('checkGoogle :>> ', checkGoogle)
+        if (checkGoogle) {
+          navigation.navigate('BottomTab')
+        } else {
+          console.log('errorrr')
+        } break
+      }
+    }
   }
 
   return (
@@ -35,7 +42,7 @@ const SignUpMethodScreen = ({ navigation }) => {
               style={{ width: 20, height: 20, marginRight: 20 }}
             />
           )} style={{ width: 300, borderRadius: 5 }} color='white' mode='contained'
-          onPress={googleSignUp}
+          onPress={() => trySignUp('google')}
           labelStyle={{ fontFamily: 'Comfortaa-Bold', color: '#4285F4' }}
         >
           cadastrar com google

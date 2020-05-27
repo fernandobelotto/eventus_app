@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import { View, Text, Image, StyleSheet } from 'react-native'
 import { TextInput, Button } from 'react-native-paper'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import signUp from '../../hooks/signUp'
 
 const SignUpScreen = ({ navigation }) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [pass, setPass] = useState('')
-  const [pass2, setPass2] = useState('')
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'space-between' }}>
@@ -41,15 +41,13 @@ const SignUpScreen = ({ navigation }) => {
           value={pass}
           onChangeText={pass => setPass(pass)}
         />
-        <TextInput
-          style={{ width: 300, height: 50 }}
-          mode='outlined'
-          label='confirme a senha'
-          value={pass2}
-          onChangeText={pass => setPass2(pass)}
-        />
         <View style={{ height: 20 }} />
-        <Button style={{ width: 300, borderRadius: 5 }} color='#1C35B9' mode='contained' onPress={() => navigation.navigate('BottomTab')} labelStyle={{ fontFamily: 'Comfortaa-Bold', color: 'white' }}>
+        <Button
+          style={{ width: 300, borderRadius: 5 }}
+          color='#1C35B9' mode='contained'
+          onPress={() => { signUp(email, name, 'e-mail', pass); navigation.navigate('BottomTab') }}
+          labelStyle={{ fontFamily: 'Comfortaa-Bold', color: 'white' }}
+        >
           entrar
         </Button>
       </View>
