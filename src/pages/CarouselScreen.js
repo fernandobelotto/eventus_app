@@ -22,7 +22,12 @@ const CarouselScreen = ({ navigation }) => {
         <Button style={{ width: 200, borderRadius: 5 }} color='white' icon='log-in' mode='contained' onPress={() => navigation.navigate('SignInScreen')} labelStyle={{ fontFamily: 'Comfortaa-Bold', color: '#6658ED' }}>
           entrar
         </Button>
-        <Button style={{ width: 200, borderColor: 'white', borderWidth: 3, borderRadius: 5 }} color='white' mode='outlined' onPress={() => console.log('Pressed')} labelStyle={{ fontFamily: 'Comfortaa-Bold', color: 'white' }}>
+        <Button
+          style={{ width: 200, borderColor: 'white', borderWidth: 3, borderRadius: 5 }}
+          color='white' mode='outlined'
+          onPress={() => navigation.navigate('SignUpMethodScreen')}
+          labelStyle={{ fontFamily: 'Comfortaa-Bold', color: 'white' }}
+        >
           cadastrar
         </Button>
       </View>

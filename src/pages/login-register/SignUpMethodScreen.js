@@ -7,13 +7,13 @@ import googleLogin from '../../hooks/googleLogin'
 // import signUp from '../../hooks/signUp'
 
 const SignUpMethodScreen = ({ navigation }) => {
-  async function googleSignUp() {
+  async function googleSignUp () {
     const { name, email, method } = await googleLogin()
     console.log(name, email, method)
     // signUp(name, email, method)
   }
 
-  async function facebookSignUp() {
+  async function facebookSignUp () {
     // const userData = await facebookLogin()
     // console.log(userData)
   }

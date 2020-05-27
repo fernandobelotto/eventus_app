@@ -8,22 +8,20 @@ GoogleSignin.configure({
 })
 
 export default async function googleLogin () {
-  // try {
-  console.log('AHAHHahhahhahahHAHHAHAHAHAHAHHAHA')
-  await GoogleSignin.hasPlayServices()
-  const userInfo = await GoogleSignin.signIn()
-  console.log(userInfo)
-  console.log('AHAHHahhahhahahHAHHAHAHAHAHAHHAHA')
-  return {
-    user: userInfo.user.email,
-    name: userInfo.user.name,
-    method: 'google'
+  try {
+    await GoogleSignin.hasPlayServices()
+    const userInfo = await GoogleSignin.signIn()
+    console.log(userInfo)
+    return {
+      email: userInfo.user.email,
+      name: userInfo.user.name,
+      method: 'google'
+    }
+  } catch (error) {
+    if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+      return
+    }
+    console.log('Something went wrong with google login')
+    console.log(error)
   }
-  // } catch (error) {
-  //   if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-  //     return
-  //   }
-  //   console.log('Something went wrong with google login')
-  //   console.log(error)
-  // }
 }
