@@ -9,7 +9,7 @@ const CarouselScreen = ({ navigation }) => {
       <Image source={require('../assets/images/header-logo.png')} resizeMode='contain' style={{ width: 200, height: 100, alignSelf: 'center' }} />
       <Swiper containerStyle={{ flex: 1 }} dotColor='rgba(255,255,255,0.4)' activeDotColor='white'>
         <View style={styles.slide}>
-          <Text style={styles.text}>Descubra os melhore eventos</Text>
+          <Text style={styles.text}>Descubra os melhores eventos</Text>
         </View>
         <View style={styles.slide}>
           <Text style={styles.text}>Compre com segurança</Text>
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'white',
-    fontSize: 48,
+    fontSize: 46,
     fontFamily: 'Comfortaa-Bold',
     textAlign: 'left'
   }

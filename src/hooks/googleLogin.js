@@ -7,7 +7,7 @@ GoogleSignin.configure({
   forceCodeForRefreshToken: true // [Android] related to `serverAuthCode`, read the docs link below *.
 })
 
-export default async function googleLogin () {
+export default async function googleLogin() {
   try {
     await GoogleSignin.hasPlayServices()
     const userInfo = await GoogleSignin.signIn()
@@ -15,7 +15,6 @@ export default async function googleLogin () {
     return {
       email: userInfo.user.email,
       name: userInfo.user.name,
-      pass: 'undefined',
       method: 'google'
     }
   } catch (error) {

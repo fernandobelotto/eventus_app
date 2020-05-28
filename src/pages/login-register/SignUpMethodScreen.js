@@ -12,14 +12,14 @@ const SignUpMethodScreen = ({ navigation }) => {
     switch (method) {
       case 'google': {
         const { email, name } = await googleLogin()
-        console.log('name :>> ', name)
-        console.log('email :>> ', email)
-        const checkGoogle = await signUp(email, name, 'google', 'undefined')
-        console.log('checkGoogle :>> ', checkGoogle)
+
+        const checkGoogle = await signUp(email, name, 'google')
+        console.log('cadastro pelo google na api deu: ')
+        console.log(checkGoogle)
         if (checkGoogle) {
           navigation.navigate('BottomTab')
         } else {
-          console.log('errorrr')
+          console.log('error')
         } break
       }
     }

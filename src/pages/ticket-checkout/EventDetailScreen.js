@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { StyleSheet, Text, View, Image } from 'react-native'
 import { Appbar, Button } from 'react-native-paper'
 import Feather from 'react-native-vector-icons/Feather'
 import Material from 'react-native-vector-icons/MaterialIcons'
 
-const EventDetailScreen = ({ navigation }) => {
+const EventDetailScreen = ({ navigation, route }) => {
+  const { data } = route.params
   return (
     <View style={styles.back}>
       <Appbar.Header style={{ backgroundColor: 'transparent', elevation: 0, justifyContent: 'space-between' }}>
@@ -14,21 +15,22 @@ const EventDetailScreen = ({ navigation }) => {
       <View style={styles.container}>
         <Image source={require('../../assets/images/photo1.png')} resizeMode='cover' style={{ width: '100%', height: 200, backgroundColor: 'red' }} />
         <View style={{ paddingHorizontal: 30 }}>
-          <Text style={styles.title}>Nome do evento</Text>
-          <Text style={styles.description}>Laborum ex ex veniam minim labore. Occaecat voluptate velit consectetur exercitation tempor cillum consectetur consectetur in sint Lorem laboris cupidatat veniam. Culpa tempor fugiat esse ex velit commodo culpa ad est velit sit. Eu ea dolor et exercitation. Consectetur laborum mollit voluptate amet consequat in et exercitation. Cillum exercitation amet labore cillum nisi elit duis.</Text>
+          <Text style={styles.title}>{data.eventName}</Text>
+          <Text style={styles.description}>{data.eventDescription}</Text>
           <View style={styles.iconRow}>
             <Material name='room' color='#6658ED' size={30} />
-            <Text style={styles.info}>Barão Geraldo</Text>
+            <Text style={styles.info}>{data.eventPlace}</Text>
           </View>
           <View style={styles.iconRow}>
             <Feather name='calendar' color='#6658ED' size={30} />
-            <Text style={styles.info}>seg, 25 de maio | 17:00 - 19:00</Text>
+            <Text style={styles.info}>{data.eventDate}</Text>
           </View>
-          <View style={styles.iconRow}>
-            <Material name='local-offer' color='#6658ED' size={30} />
-            <Text style={styles.info}>21,00 / 54,00 / grátis</Text>
-          </View>
-          <Button style={{ marginTop: 40, width: 250, borderRadius: 5, alignSelf: 'center' }} color='#1C35B9' mode='contained' onPress={() => navigation.navigate('TicketChoiceScreen')} labelStyle={{ fontFamily: 'Comfortaa-Bold', color: 'white' }}>
+          <Button
+            style={{ marginTop: 40, width: 250, borderRadius: 5, alignSelf: 'center' }}
+            color='#1C35B9' mode='contained'
+            labelStyle={{ fontFamily: 'Comfortaa-Bold', color: 'white' }}
+            onPress={() => navigation.navigate('TicketChoiceScreen', { data })}
+          >
             ingressos
           </Button>
         </View>
@@ -48,9 +50,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 20,
     margin: 30,
-    flex: 1,
     overflow: 'hidden',
-    elevation: 10
+    elevation: 10,
+    height: 'auto',
+    paddingBottom: 30
   },
   title: {
     fontFamily: 'Comfortaa-Bold',

@@ -95,12 +95,16 @@ const SignInScreen = ({ navigation }) => {
         <Button
           style={{ width: 300, borderRadius: 5 }}
           color='#1C35B9' mode='contained'
-          onPress={() => tryLogin('email')}
+          onPress={() => {
+            // tryLogin('email');
+            navigation.navigate('BottomTab')
+          }}
           labelStyle={{ fontFamily: 'Comfortaa-Bold', color: 'white' }}
         >
           entrar
         </Button>
       </View>
+
       <Snackbar
         style={{ backgroundColor: 'red', borderRadius: 20 }}
         duration={2500}
@@ -109,13 +113,17 @@ const SignInScreen = ({ navigation }) => {
       >
         email ou senha inválidos
       </Snackbar>
+
       <View style={{ flex: 0.1, justifyContent: 'space-evenly' }}>
+
         <TouchableOpacity onPress={() => navigation.navigate('SignUpMethodScreen')}>
-          <Text style={styles.textButton}> Não possue conta? cadastre aqui</Text>
+          <Text style={styles.textButton}>Não possue conta? cadastre aqui</Text>
         </TouchableOpacity>
+
         <TouchableOpacity>
           <Text style={styles.textButton}>Esqueceu a senha? recupere aqui</Text>
         </TouchableOpacity>
+
       </View>
     </View>
   )

@@ -1,14 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, Text, View, FlatList } from 'react-native'
 import { Appbar, Button } from 'react-native-paper'
 import Feather from 'react-native-vector-icons/Feather'
 import Ticket from '../../components/Ticket'
 
-const TicketChoiceScreen = ({ navigation }) => {
-  const data = [
-    { id: 'asdf', name: 'vip', price: 25.50 },
-    { id: 'asdft', name: 'normal', price: 10.50 }
-  ]
+const TicketChoiceScreen = ({ navigation, route }) => {
+  const { data } = route.params
+  const [selected, setSelected] = useState(new Map())
+
+  const onSelect = React.useCallback(
+    id => {
+      const newSelected = new Map(selected)
+      newSelected.set(id, !selected.get(id))
+      setSelected(newSelected)
+    },
+    [selected]
+  )
 
   return (
     <View style={styles.back}>
@@ -17,15 +24,19 @@ const TicketChoiceScreen = ({ navigation }) => {
       </Appbar.Header>
       <View style={styles.container}>
         <View style={{ paddingHorizontal: 30 }}>
-          <Text style={styles.title}>Nome do evento</Text>
+          <Text style={styles.title}>{data.eventName}</Text>
           <FlatList
-            data={data}
-            renderItem={({ item }) => <Ticket name={item.name} id={item.id} price={item.price} />}
-            style={{ height: '75%' }}
+            extraData={selected}
+            data={data.tickets}
+            renderItem={({ item }) => {
+              return (
+                <Ticket selected={!!selected.get(item._id)} onSelect={onSelect} name={item.name} id={item._id} price={item.price} style={{ height: '75%' }} />
+              )
+            }}
           />
-          <Text style={styles.info}>total 21,00</Text>
+          {/* <Text style={styles.info}>total 21,00</Text> */}
           <Button
-            style={{ width: 250, borderRadius: 5, alignSelf: 'center' }}
+            style={{ width: 250, borderRadius: 5, alignSelf: 'center', marginVertical: 30 }}
             color='#1C35B9' mode='contained'
             onPress={() => navigation.navigate('PaymentInfoScreen')}
             labelStyle={{ fontFamily: 'Comfortaa-Bold', color: 'white' }}
@@ -49,7 +60,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 20,
     margin: 30,
-    flex: 1,
+    height: 'auto',
     overflow: 'hidden',
     elevation: 10
   },

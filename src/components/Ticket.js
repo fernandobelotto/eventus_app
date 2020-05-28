@@ -1,24 +1,21 @@
-import React, { useState } from 'react'
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import React from 'react'
+import { View, Text, StyleSheet } from 'react-native'
 import Material from 'react-native-vector-icons/MaterialIcons'
 import { IconButton } from 'react-native-paper'
 
-const Ticket = ({ id, name, price }) => {
-  const [pressed, setPressed] = useState(false)
+const Ticket = ({ id, name, price, data, onSelect, selected }) => {
   return (
-    <TouchableOpacity activeOpacity={1}>
-      <View style={styles.container}>
-        <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-evenly', alignItems: 'center' }}>
-          <Text style={styles.text}>{name}</Text>
-          <Text style={styles.text}>R${price}</Text>
-          <IconButton
-            icon={() => <Material name='confirmation-number' color={pressed ? 'blue' : 'grey'} size={30} />}
-            size={20}
-            onPress={() => setPressed(!pressed)}
-          />
-        </View>
+    <View style={styles.container}>
+      <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-evenly', alignItems: 'center' }}>
+        <Text style={styles.text}>{name}</Text>
+        <Text style={styles.text}>R${price}</Text>
+        <IconButton
+          icon={() => <Material name='confirmation-number' color={selected ? 'blue' : 'grey'} size={30} />}
+          size={20}
+          onPress={() => onSelect(id)}
+        />
       </View>
-    </TouchableOpacity>
+    </View>
   )
 }
 
