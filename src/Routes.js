@@ -30,6 +30,7 @@ const routes = () => {
         <Stack.Screen name='SignUpScreen' component={SignUpScreen} />
         {/* bottom tab */}
         <Stack.Screen name='BottomTab' component={BottomTab} />
+        {/* ticket list */}
         <Stack.Screen name='TicketDetailScreen' component={TicketDetailScreen} />
         {/* ticket checkout */}
         <Stack.Screen name='EventDetailScreen' component={EventDetailScreen} />

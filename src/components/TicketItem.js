@@ -7,8 +7,9 @@ const TicketItem = ({ navigation, data }) => {
     <TouchableOpacity activeOpacity={1} onPress={() => { navigation.navigate('TicketDetailScreen', { data }) }}>
       <View style={styles.container}>
         <View>
+          <Text style={styles.text}>{data.eventId.eventName}</Text>
+          <Text style={styles.text}>{data.eventId.eventDate}</Text>
           <Text style={styles.text}>{data.name}</Text>
-          <Text style={styles.text}>{data.price}</Text>
         </View>
         <Image source={require('../assets/images/photo1.png')} resizeMode='cover' style={{ width: 150, height: '100%', backgroundColor: 'red' }} />
         <Material name='confirmation-number' color='#201774' size={30} />
