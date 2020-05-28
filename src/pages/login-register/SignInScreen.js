@@ -1,12 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { View, Text, Image, StyleSheet } from 'react-native'
 import { TextInput, Button, Snackbar } from 'react-native-paper'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import AsyncStorage from '@react-native-community/async-storage'
 import facebookLogin from '../../hooks/facebookLogin'
 import googleLogin from '../../hooks/googleLogin'
 import login from '../../hooks/login'
+import { Context } from '../../context'
 
 const SignInScreen = ({ navigation }) => {
+  const { user } = useContext(Context)
+  const { dispatch: userDispatch } = user
+
   const [email, setEmail] = useState('')
   const [snack, setSnack] = useState(false)
   const [pass, setPass] = useState('')
@@ -23,14 +28,24 @@ const SignInScreen = ({ navigation }) => {
       }
       case 'gmail': {
         const { email } = await googleLogin()
-        console.log(email)
-        const checkGoogle = await login(email, 'undefined', 'google')
-        if (checkGoogle) {
+        const response = await login(email, 'undefined', 'google')
+        if (response) {
+          console.log(response)
+          await userDispatch({ type: 'add_id', payload: { id: response.userId } })
+          await storeData(response.userId, response.name)
           navigation.navigate('BottomTab')
         } else {
           setSnack(true)
         } break
       }
+    }
+  }
+
+  async function storeData (userId, name, code) {
+    try {
+      await AsyncStorage.setItem('userId', userId)
+    } catch (e) {
+      console.log(e)
     }
   }
 

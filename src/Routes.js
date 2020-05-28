@@ -1,8 +1,7 @@
 import React from 'react'
-import { View, Text } from 'react-native'
 
 import { NavigationContainer } from '@react-navigation/native'
-import { createStackNavigator, TransitionPresets, CardStyleInterpolators } from '@react-navigation/stack'
+import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack'
 
 import SplashScreen from './pages/SplashScreen'
 import CarouselScreen from './pages/CarouselScreen'

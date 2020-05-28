@@ -4,11 +4,11 @@ import Material from 'react-native-vector-icons/MaterialIcons'
 
 const TicketItem = ({ navigation, data }) => {
   return (
-    <TouchableOpacity activeOpacity={1} onPress={() => { navigation.navigate('TicketDetailScreen') }}>
+    <TouchableOpacity activeOpacity={1} onPress={() => { navigation.navigate('TicketDetailScreen', { data }) }}>
       <View style={styles.container}>
         <View>
-          <Text style={styles.text}>{data.eventName}</Text>
-          <Text style={styles.text}>{data.eventData}</Text>
+          <Text style={styles.text}>{data.name}</Text>
+          <Text style={styles.text}>{data.price}</Text>
         </View>
         <Image source={require('../assets/images/photo1.png')} resizeMode='cover' style={{ width: 150, height: '100%', backgroundColor: 'red' }} />
         <Material name='confirmation-number' color='#201774' size={30} />

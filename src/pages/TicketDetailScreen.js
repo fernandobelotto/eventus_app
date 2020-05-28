@@ -1,17 +1,22 @@
-import React, { useState } from 'react'
-import { StyleSheet, Text, View, ScrollView } from 'react-native'
+import React, { useState, useContext, useEffect } from 'react'
+import { StyleSheet, View, ScrollView } from 'react-native'
 import { Appbar } from 'react-native-paper'
 import Feather from 'react-native-vector-icons/Feather'
 import TicketCard from '../components/TicketCard'
 import Carousel, { Pagination } from 'react-native-snap-carousel'
+import { Context } from '../context'
+import { getApi } from '../api/fetch'
 
 const TicketDetailScreen = ({ navigation }) => {
-  const tickets = [
-    { id: 'asdf', name: 'vip', price: 25.50, eventName: 'palestra', eventData: '20/04/2021' },
-    { id: 'asdf', name: 'vip', price: 25.50, eventName: 'palestra', eventData: '20/04/2021' },
-    { id: 'asdf', name: 'vip', price: 25.50, eventName: 'palestra', eventData: '20/04/2021' },
-    { id: 'asdft', name: 'normal', price: 10.50, eventName: 'congresso', eventData: '20/02/2020' }
-  ]
+  const { user } = useContext(Context)
+  const { state: userState } = user
+
+  const [tickets, setTickets] = useState([])
+  useEffect(async () => {
+    const { tickets } = await getApi(`/ticket/${userState.id}`)
+    setTickets(tickets)
+  }, [])
+
   const [active, setActive] = useState(0)
   return (
     <View style={styles.back}>
@@ -21,7 +26,7 @@ const TicketDetailScreen = ({ navigation }) => {
       <ScrollView>
         <Carousel
           data={tickets}
-          renderItem={() => <TicketCard />}
+          renderItem={({ item }) => <TicketCard ticket={item} />}
           itemWidth={400}
           sliderWidth={400}
           containerCustomStyle={{ height: 'auto' }}

@@ -1,7 +1,7 @@
-// const URL_BASE = 'http://192.168.0.102:3000'
-const URL_BASE = 'https://desafio-mb-api.herokuapp.com'
+const URL_BASE = 'http://192.168.0.102:3000'
+// const URL_BASE = 'https://desafio-mb-api.herokuapp.com'
 
-export default function eventusFetch(url, options) {
+export default function eventusFetch (url, options) {
   const defaultHeader = { headers: { 'Content-Type': 'application/json' } }
 
   options = { ...defaultHeader, ...options }
@@ -19,7 +19,7 @@ export default function eventusFetch(url, options) {
     })
 }
 
-export function getApi(url) {
+export function getApi (url) {
   const options = {
     method: 'GET'
   }
@@ -33,7 +33,7 @@ export function getApi(url) {
     })
 }
 
-export function postApi(url, bodyData) {
+export function postApi (url, bodyData) {
   const options = {
     method: 'POST',
     body: JSON.stringify(bodyData)

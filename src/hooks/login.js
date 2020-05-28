@@ -1,6 +1,6 @@
 import { postApi } from '../api/fetch'
 
-export default async function login(userEmail, userPass, loginOption) {
+export default async function login (userEmail, userPass, loginOption) {
   if (userEmail && userPass) {
     try {
       const user = {
@@ -11,7 +11,9 @@ export default async function login(userEmail, userPass, loginOption) {
       const url = '/user/login'
       const response = await postApi(url, user)
       console.log('response', response)
-      if (response.status === 'success') return true
+      if (response.status === 'success') {
+        return response
+      }
     } catch {
       console.log('Ops! Algo aconteceu, tente novamente mais tarde!')
       return false

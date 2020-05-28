@@ -22,15 +22,15 @@ const theme = {
 
 const App = () => {
   return (
-    <PaperProvider
-      theme={theme} settings={{
-        icon: props => <Feather {...props} />
-      }}
-    >
-      <TicketProvider>
+    <TicketProvider>
+      <PaperProvider
+        theme={theme} settings={{
+          icon: props => <Feather {...props} />
+        }}
+      >
         <Routes />
-      </TicketProvider>
-    </PaperProvider>
+      </PaperProvider>
+    </TicketProvider>
   )
 }
 

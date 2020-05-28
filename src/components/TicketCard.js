@@ -3,27 +3,32 @@ import { StyleSheet, Text, View } from 'react-native'
 import { Button } from 'react-native-paper'
 import QRCode from 'react-native-qrcode-svg'
 
-const TicketCard = ({ navigation }) => {
+const TicketCard = ({ navigation, ticket }) => {
   return (
     <View style={styles.container}>
       <View style={{ paddingHorizontal: 30, height: 'auto' }}>
         <Text style={styles.description}>nome</Text>
         <Text style={styles.title}>Fernando Gabriel</Text>
         <Text style={styles.description}>ticket</Text>
-        <Text style={styles.title}>entrada vip</Text>
+        <Text style={styles.title}>{ticket.name}</Text>
         <Text style={styles.description}>evento</Text>
-        <Text style={styles.title}>palestra sobre react native</Text>
-        <Text style={styles.description}>data</Text>
-        <Text style={styles.title}>seg, 25 de maio | 17:00 - 19:00</Text>
+        <Text style={styles.title}>{ticket.eventId.eventName}</Text>
+        <Text style={styles.description}>datas</Text>
+        <Text style={styles.title}>{ticket.eventId.eventDate}</Text>
         <Text style={styles.description}>código</Text>
-        <Text style={styles.title}>1234068406</Text>
+        <Text style={styles.title}>{ticket._id}</Text>
         <View style={{ alignSelf: 'center', margin: 20 }}>
           <QRCode
             size={150}
-            value='1234068406'
+            value={ticket._id}
           />
         </View>
-        <Button style={{ width: 'auto', borderColor: '#1C35B9', borderWidth: 3, borderRadius: 5 }} color='#1C35B9' mode='outlined' onPress={() => console.log('Pressed')} labelStyle={{ fontFamily: 'Comfortaa-Bold', color: '#1C35B9' }}>
+        <Button
+          style={{ width: 'auto', borderColor: '#1C35B9', borderWidth: 3, borderRadius: 5 }}
+          color='#1C35B9' mode='outlined'
+          onPress={() => console.log(ticket)}
+          labelStyle={{ fontFamily: 'Comfortaa-Bold', color: '#1C35B9' }}
+        >
           salvar na galeria
         </Button>
       </View>

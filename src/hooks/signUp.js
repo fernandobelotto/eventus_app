@@ -2,7 +2,7 @@
 import NetInfo from '@react-native-community/netinfo'
 import { postApi } from '../api/fetch'
 
-export default async function signUp(email, name, loginOption, pass) {
+export default async function signUp (email, name, loginOption, pass) {
   try {
     const { isConnected } = await NetInfo.fetch()
     if (!isConnected) return 'no internet'

@@ -1,14 +1,21 @@
-import React from 'react'
-import { View, Text, FlatList } from 'react-native'
+import React, { useEffect, useState, useContext } from 'react'
+import { View, FlatList } from 'react-native'
 import { Appbar } from 'react-native-paper'
-import Feather from 'react-native-vector-icons/Feather'
+
+import { getApi } from '../api/fetch'
+import { Context } from '../context'
 import TicketItem from '../components/TicketItem'
 
 const TicketsScreen = ({ navigation }) => {
-  const tickets = [
-    { id: 'asdf', name: 'vip', price: 25.50, eventName: 'palestra', eventData: '20/04/2021' },
-    { id: 'asdft', name: 'normal', price: 10.50, eventName: 'congresso', eventData: '20/02/2020' }
-  ]
+  const { user } = useContext(Context)
+  const { state: userState } = user
+
+  const [tickets, setTickets] = useState([])
+  useEffect(async () => {
+    const { tickets } = await getApi(`/ticket/${userState.id}`)
+    setTickets(tickets)
+  }, [])
+
   return (
     <View>
       <Appbar.Header style={{ backgroundColor: 'transparent', elevation: 0 }}>
