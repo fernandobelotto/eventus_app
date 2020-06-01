@@ -1,10 +1,14 @@
-import React, { useState } from 'react'
-import { View, Text, Image, StyleSheet } from 'react-native'
+import React, { useState, useContext } from 'react'
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import { TextInput, Button, Snackbar } from 'react-native-paper'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import AsyncStorage from '@react-native-community/async-storage'
 import signUp from '../../hooks/signUp'
+import { Context } from '../../context'
 
 const SignUpScreen = ({ navigation }) => {
+  const { user } = useContext(Context)
+  const { dispatch: userDispatch } = user
+
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [pass, setPass] = useState('')
@@ -13,8 +17,10 @@ const SignUpScreen = ({ navigation }) => {
   async function trySignUp (method) {
     switch (method) {
       case 'email': {
-        const checkedSignUp = await signUp(email, name, 'email', pass)
-        if (checkedSignUp) {
+        const response = await signUp(email, name, 'email', pass)
+        if (response) {
+          await userDispatch({ type: 'add_id', payload: { id: response.userId } })
+          await storeData(response.userId, response.name)
           navigation.navigate('BottomTab')
         } else {
           setSnack(true)
@@ -22,13 +28,24 @@ const SignUpScreen = ({ navigation }) => {
       }
       case 'gmail': {
         const { email, name } = await googleLogin()
-        const checkGoogle = await signUp(email, name, 'google')
-        if (checkGoogle) {
+        const response = await signUp(email, name, 'google')
+        if (response) {
+          await userDispatch({ type: 'add_id', payload: { id: response.userId } })
+          await storeData(response.userId, response.name)
           navigation.navigate('BottomTab')
         } else {
           setSnack(true)
         } break
       }
+    }
+  }
+
+  async function storeData (userId, name) {
+    try {
+      await AsyncStorage.setItem('userId', userId)
+      await AsyncStorage.setItem('name', name)
+    } catch (e) {
+      console.log(e)
     }
   }
 

@@ -17,7 +17,6 @@ const ProfileScreen = () => {
         <Text style={styles.text}>Juliana Peres</Text>
       </View>
       <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'center', marginBottom: 50 }}>
-
         <Button style={{ width: 200, borderColor: '#1C35B9', borderWidth: 3, borderRadius: 5 }} icon={() => <Feather name='log-out' color='#1C35B9' size={20} />} color='#1C35B9' mode='outlined' onPress={() => console.log('Pressed')} labelStyle={{ fontFamily: 'Comfortaa-Bold', color: '#1C35B9' }}>
           Sair
         </Button>

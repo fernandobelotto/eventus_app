@@ -20,8 +20,17 @@ const TicketDetailScreen = ({ navigation }) => {
   const [active, setActive] = useState(0)
   return (
     <View style={styles.back}>
-      <Appbar.Header style={{ backgroundColor: 'transparent', elevation: 0, justifyContent: 'space-between' }}>
-        <Appbar.Action icon={() => <Feather name='arrow-left' color='white' size={25} />} onPress={() => { navigation.goBack() }} />
+      <Appbar.Header
+        style={{
+          backgroundColor: 'transparent',
+          elevation: 0,
+          justifyContent: 'space-between'
+        }}
+      >
+        <Appbar.Action
+          icon={() => <Feather name='arrow-left' color='white' size={25} />}
+          onPress={() => { navigation.goBack() }}
+        />
       </Appbar.Header>
       <ScrollView>
         <Carousel
@@ -36,7 +45,12 @@ const TicketDetailScreen = ({ navigation }) => {
       <Pagination
         dotsLength={tickets.length}
         activeDotIndex={active}
-        containerStyle={{ height: 'auto', backgroundColor: 'tranparent', margin: 5, paddingVertical: 0, zIndex: 0 }}
+        containerStyle={{
+          height: 'auto',
+          backgroundColor: 'tranparent',
+          margin: 5,
+          paddingVertical: 0
+        }}
         dotStyle={{
           width: 10,
           height: 10,
@@ -57,31 +71,5 @@ const styles = StyleSheet.create({
   back: {
     flex: 1,
     backgroundColor: '#6658ED'
-  },
-  container: {
-    backgroundColor: 'white',
-    borderRadius: 20,
-    margin: 30,
-    overflow: 'hidden',
-    elevation: 10,
-    height: 'auto',
-    paddingBottom: 30
-  },
-  title: {
-    fontFamily: 'Comfortaa-Bold',
-    fontSize: 22,
-    color: '#201774'
-  },
-  description: {
-    fontFamily: 'Comfortaa-Light',
-    fontSize: 18,
-    color: '#201774',
-    marginTop: 10
-  },
-  info: {
-    fontFamily: 'Comfortaa-Regular',
-    fontSize: 18,
-    color: '#201774',
-    marginLeft: 10
   }
 })

@@ -3,7 +3,6 @@ import { View, Text, Image, StyleSheet } from 'react-native'
 import { TextInput, Button, Snackbar } from 'react-native-paper'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import AsyncStorage from '@react-native-community/async-storage'
-import facebookLogin from '../../hooks/facebookLogin'
 import googleLogin from '../../hooks/googleLogin'
 import login from '../../hooks/login'
 import { Context } from '../../context'
@@ -16,11 +15,13 @@ const SignInScreen = ({ navigation }) => {
   const [snack, setSnack] = useState(false)
   const [pass, setPass] = useState('')
 
-  async function tryLogin (method) {
+  async function tryLogin(method) {
     switch (method) {
       case 'email': {
-        const checkedLogin = await login(email, pass, 'email')
-        if (checkedLogin) {
+        const response = await login(email, pass, 'email')
+        if (response) {
+          await userDispatch({ type: 'add_id', payload: { id: response.userId } })
+          await storeData(response.userId, response.name)
           navigation.navigate('BottomTab')
         } else {
           setSnack(true)
@@ -41,9 +42,10 @@ const SignInScreen = ({ navigation }) => {
     }
   }
 
-  async function storeData (userId, name, code) {
+  async function storeData(userId, name) {
     try {
       await AsyncStorage.setItem('userId', userId)
+      await AsyncStorage.setItem('name', name)
     } catch (e) {
       console.log(e)
     }
@@ -71,7 +73,7 @@ const SignInScreen = ({ navigation }) => {
         >
           Entrar com google
         </Button>
-        <Button
+        {/* <Button
           icon={({ size, color }) => (
             <Image
               source={require('../../assets/images/facebook.png')}
@@ -83,7 +85,7 @@ const SignInScreen = ({ navigation }) => {
           labelStyle={{ fontFamily: 'Comfortaa-Bold', color: 'white' }}
         >
           Entrar com facebook
-        </Button>
+        </Button> */}
       </View>
 
       <View style={{ flex: 0.3, justifyContent: 'space-evenly', alignItems: 'center' }}>
@@ -111,8 +113,8 @@ const SignInScreen = ({ navigation }) => {
           style={{ width: 300, borderRadius: 5 }}
           color='#1C35B9' mode='contained'
           onPress={() => {
-            // tryLogin('email');
-            navigation.navigate('BottomTab')
+            tryLogin('email')
+            // navigation.navigate('BottomTab')
           }}
           labelStyle={{ fontFamily: 'Comfortaa-Bold', color: 'white' }}
         >
@@ -135,9 +137,9 @@ const SignInScreen = ({ navigation }) => {
           <Text style={styles.textButton}>Não possue conta? cadastre aqui</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity>
+        {/* <TouchableOpacity>
           <Text style={styles.textButton}>Esqueceu a senha? recupere aqui</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
       </View>
     </View>

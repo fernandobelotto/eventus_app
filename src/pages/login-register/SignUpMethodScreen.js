@@ -8,14 +8,12 @@ import signUp from '../../hooks/signUp'
 // import signUp from '../../hooks/signUp'
 
 const SignUpMethodScreen = ({ navigation }) => {
-  async function trySignUp (method) {
+  async function trySignUp(method) {
     switch (method) {
       case 'google': {
         const { email, name } = await googleLogin()
 
         const checkGoogle = await signUp(email, name, 'google')
-        console.log('cadastro pelo google na api deu: ')
-        console.log(checkGoogle)
         if (checkGoogle) {
           navigation.navigate('BottomTab')
         } else {
@@ -48,7 +46,7 @@ const SignUpMethodScreen = ({ navigation }) => {
           cadastrar com google
         </Button>
 
-        <Button
+        {/* <Button
           icon={({ size, color }) => (
             <Image
               source={require('../../assets/images/facebook.png')}
@@ -57,7 +55,7 @@ const SignUpMethodScreen = ({ navigation }) => {
           )} style={{ width: 300, borderRadius: 5 }} color='#1877F2' mode='contained' onPress={() => navigation.navigate('SignUpMethodScreen')} labelStyle={{ fontFamily: 'Comfortaa-Bold', color: 'white' }}
         >
           cadastrar com facebook
-        </Button>
+        </Button> */}
         <Button style={{ width: 300, borderRadius: 5 }} color='#1C35B9' mode='contained' onPress={() => navigation.navigate('SignUpScreen')} labelStyle={{ fontFamily: 'Comfortaa-Bold', color: 'white' }}>
           cadastrar com email
         </Button>

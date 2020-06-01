@@ -8,7 +8,6 @@ const TicketItem = ({ navigation, data }) => {
       <View style={styles.container}>
         <View>
           <Text style={styles.text}>{data.eventId.eventName}</Text>
-          <Text style={styles.text}>{data.eventId.eventDate}</Text>
           <Text style={styles.text}>{data.name}</Text>
         </View>
         <Image source={require('../assets/images/photo1.png')} resizeMode='cover' style={{ width: 150, height: '100%', backgroundColor: 'red' }} />
